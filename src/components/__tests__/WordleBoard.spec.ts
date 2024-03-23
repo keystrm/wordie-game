@@ -12,4 +12,6 @@ describe('WordleBoard', () => {
 
     expect(wrapper.text()).toContain(VICTORY_MESSAGE)
   })
+  it.todo('a failed message appears when user guess the word of the day incorrectly')
+  it.todo('no end-message appears when user has not made a guess')
 })
