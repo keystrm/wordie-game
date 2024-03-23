@@ -1,9 +1,17 @@
 import { mount } from '@vue/test-utils'
-import HelloWorld from '../WordleBoard.vue'
+import WordleBoard from '../WordleBoard.vue'
 
 describe('WordleBoard', () => {
-  it('renders properly', () => {
-    const wrapper = mount(HelloWorld, { props: { msg: 'Hello Vitest' } })
-    expect(wrapper.text()).toContain('Hello Vitest')
+  it('a success message appears when user guess the word of the day', async () => {
+    //Arrange
+    const wrapper = mount(WordleBoard, { props: { wordOfTheDay: 'Tests' } })
+
+    //Act
+    const guessInput = wrapper.find('input[type=text]')
+    await guessInput.setValue('Tests')
+    await guessInput.trigger('keydown.enter')
+
+    //Assert
+    expect(wrapper.text()).toContain('You won!')
   })
 })
