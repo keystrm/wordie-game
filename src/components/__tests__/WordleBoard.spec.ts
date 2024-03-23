@@ -21,5 +21,10 @@ describe('WordleBoard', () => {
 
     expect(wrapper.text()).toContain(DEFEAT_MESSAGE)
   })
-  test.todo('no end-message appears when user has not made a guess')
+  test('no end-message appears when user has not made a guess', async () => {
+    const wrapper = mount(WordleBoard, { props: { wordOfTheDay: 'Tests' } })
+
+    expect(wrapper.text()).not.toContain(VICTORY_MESSAGE)
+    expect(wrapper.text()).not.toContain(DEFEAT_MESSAGE)
+  })
 })
