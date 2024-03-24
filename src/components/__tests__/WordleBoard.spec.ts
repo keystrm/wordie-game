@@ -9,6 +9,7 @@ describe('WordleBoard', () => {
   beforeEach(() => {
     wrapper = mount(WordleBoard, { props: { wordOfTheDay } })
   })
+
   const playerSubmitsGuess = async (guess: string) => {
     const guessInput = wrapper.find('input[type=text]')
     await guessInput.setValue(guess)
@@ -26,5 +27,10 @@ describe('WordleBoard', () => {
   test('no end-message appears when user has not made a guess', async () => {
     expect(wrapper.text()).not.toContain(VICTORY_MESSAGE)
     expect(wrapper.text()).not.toContain(DEFEAT_MESSAGE)
+  })
+  test('show a console warning if the word of the day is exactly than 5 letters', async () => {
+    console.warn = vi.fn()
+    mount(WordleBoard, { props: { wordOfTheDay: 'FLY' } })
+    expect(console.warn).toHaveBeenCalled()
   })
 })
